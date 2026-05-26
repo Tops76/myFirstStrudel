@@ -5,7 +5,9 @@ setCps(170/60/4)
 $: sound(`
 [-  -  -  - ] [cp -  -  - ] [-  -  -  - ] [cp -  -  - ],
 [bd -  -  - ] [bd -  -  - ] [bd -  -  - ] [bd -  -  - ]
-`).bank("RolandTR909").gain(0.8)
+`).bank("RolandTR909").gain(0.7)
+.delay(0.18).room(0.2)
+
 
 $: s("breaks/2").fit()
 .scrub(irand(8).div(8).seg(8)
@@ -13,4 +15,15 @@ $: s("breaks/2").fit()
 .almostNever(ply("2 | 4"))
 .orbit(2).lpf("<6000 2000 1000 4000 2000 1000>")
 .gain(1)
+._scope()
+_$: note("c4 <eb4 <g4 g3>>".fast(4)
+.sound("square")
+.tremsync(slider(2,2,8,2)).tremolophase("<0 .25 0.66>"))
+.delay(0.25).room(0.2)
+.lpf("<4000 500 1000 4000 2000>")
+.compressor(-30).vib(0.1)
+.partials(randL(200))
+.phases(randL(200))
+.vib("<.5 1 2 4 8 16>")
+.gain(slider(1,0,2,0.1))
 ._scope()
