@@ -1,0 +1,31 @@
+setcpm(120/4)
+const numHarmonics = 22;
+
+_$: sound(`
+[-  -  -  - ] [cp -  -  - ] [-  -  -  - ] [cp -  -  - ],
+[bd -  -  - ] [bd -  -  - ] [bd -  -  - ] [bd -  -  - ]
+`).bank("RolandTR909").gain(0.8)
+
+_$: s("bd sd [~ bd] sd,hh*6").lpf("<4000 2000 1000 500 200 100>")
+.gain(2)
+
+$: note("c4 <eb4 <g4 g3>>".fast(4)
+.sound("sawtooth")
+.tremsync(slider(2,2,8,2)).tremolophase("<0 .25 0.66>"))
+.delay(0.25).room(0.10)
+.lpf("<4000 500 1000 4000 2000>")
+.compressor(-30).vib(0.1)
+.partials(randL(200))
+.phases(randL(200))
+.vib("<.5 1 2 4 8 16>")
+.gain(slider(1,0,2,0.1))
+._scope()
+_$: note("c2 <eb2 <g2 g1>>".fast(2)
+.sound("sawtooth")
+.tremsync(slider(2,2,8,2)))
+.delay(0.33).room(0.50)
+.compressor(-40).vib(0.3)
+.partials(randL(200))
+.phases(randL(200))
+.vib("<.5 1 2 4 8 16>")
+._scope()
